@@ -40,7 +40,7 @@ public class SignaturePad extends View {
     private Bitmap mBitmapSavedState;
 
     private final SvgBuilder mSvgBuilder = new SvgBuilder();
-
+    private final int TRANSPARENT_WHITE = 0x01FFFFFF; // 0x00FFFFFF gets converted to 00 00 00, and then it is black on Adobe PDF
     // Cache
     private List<TimedPoint> mPointsCache = new ArrayList<>();
     private ControlTimedPoints mControlTimedPointsCached = new ControlTimedPoints();
@@ -327,7 +327,7 @@ public class SignaturePad extends View {
         int imgHeight = mSignatureBitmap.getHeight();
         int imgWidth = mSignatureBitmap.getWidth();
 
-        int backgroundColor = Color.TRANSPARENT;
+        int backgroundColor = TRANSPARENT_WHITE;
 
         int xMin = Integer.MAX_VALUE,
                 xMax = Integer.MIN_VALUE,
@@ -607,6 +607,8 @@ public class SignaturePad extends View {
         if (mSignatureBitmap == null) {
             mSignatureBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
                     Bitmap.Config.ARGB_8888);
+            mSignatureBitmap.setHasAlpha(true);
+            mSignatureBitmap.eraseColor(TRANSPARENT_WHITE);
             mSignatureBitmapCanvas = new Canvas(mSignatureBitmap);
         }
     }
