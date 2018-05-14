@@ -610,6 +610,7 @@ public class SignaturePad extends View {
             mSignatureBitmap.setHasAlpha(true);
             mSignatureBitmap.eraseColor(TRANSPARENT_WHITE);
             mSignatureBitmapCanvas = new Canvas(mSignatureBitmap);
+            mSignatureBitmapCanvas.drawColor(TRANSPARENT_WHITE);
         }
     }
 
